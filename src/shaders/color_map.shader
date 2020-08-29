@@ -1,11 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=2]
-
-[ext_resource path="res://assets/textures/gray_map.png" type="Texture" id=1]
-[ext_resource path="res://assets/textures/Leaf.005_0_diffuse.png" type="Texture" id=2]
-[ext_resource path="res://assets/textures/color_map.png" type="Texture" id=3]
-
-[sub_resource type="Shader" id=1]
-code = "shader_type spatial;
+shader_type spatial;
 render_mode blend_mix,depth_draw_opaque,cull_back,specular_schlick_ggx;
 uniform vec4 albedo : hint_color;
 uniform sampler2D texture_albedo;
@@ -58,21 +51,3 @@ void fragment() {
 	ROUGHNESS = roughness;
 	SPECULAR = specular;
 }
-"
-
-[resource]
-shader = SubResource( 1 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/specular = 0.5
-shader_param/metallic = 0.0
-shader_param/roughness = 1.0
-shader_param/point_size = 0.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
-shader_param/uv2_scale = Vector3( 1, 1, 1 )
-shader_param/uv2_offset = Vector3( 0, 0, 0 )
-shader_param/activated = false
-shader_param/texture_map_size = Vector2( 16, 1 )
-shader_param/texture_albedo = ExtResource( 2 )
-shader_param/texture_grey_map = ExtResource( 1 )
-shader_param/texture_color_map = ExtResource( 3 )

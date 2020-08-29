@@ -2,14 +2,17 @@
 
 [ext_resource path="res://assets/scene.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/main.gd" type="Script" id=2]
-[ext_resource path="res://assets/new_shadermaterial.tres" type="Material" id=3]
+[ext_resource path="res://assets/tree.material" type="Material" id=3]
 [ext_resource path="res://assets/textures/color_map.png" type="Texture" id=5]
 
 [node name="main" type="Node"]
 script = ExtResource( 2 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 0, 1, 15 )
+transform = Transform( 1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 2, 15 )
+
+[node name="control_material_shader" type="MeshInstance" parent="."]
+material_override = ExtResource( 3 )
 
 [node name="scene" parent="." instance=ExtResource( 1 )]
 transform = Transform( 0.173648, 0, 0.984808, 0, 1, 0, -0.984808, 0, 0.173648, 0, 0, 0 )
@@ -30,7 +33,7 @@ transform = Transform( 0.998745, 0.000581474, -0.0500799, -0.00281661, 0.999002,
 transform = Transform( 0.967999, 0.0749374, -0.239503, -0.00735109, 0.962432, 0.271422, 0.250845, -0.260975, 0.932185, -3.42867, -1.33884, 3.31898 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.062024, 0.998075, 0, -0.998075, 0.062024, 0, 10.9288, 0 )
+transform = Transform( 1, 0, 0, 0, 0.526926, 0.849911, 0, -0.849911, 0.526926, 0, 10.9288, 0 )
 
 [node name="hud" type="Control" parent="."]
 anchor_right = 1.0
@@ -42,16 +45,21 @@ __meta__ = {
 [node name="HBoxContainer" type="HBoxContainer" parent="hud"]
 margin_right = 40.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CheckBox" type="CheckBox" parent="hud/HBoxContainer"]
 margin_right = 127.0
 margin_bottom = 40.0
+pressed = true
 text = "Activate shader"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Button" type="Button" parent="hud/HBoxContainer"]
+visible = false
 margin_left = 131.0
 margin_right = 311.0
 margin_bottom = 40.0
@@ -64,16 +72,61 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="VSeparator" type="VSeparator" parent="hud/HBoxContainer"]
+margin_left = 131.0
+margin_right = 135.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="hud/HBoxContainer"]
+margin_left = 139.0
+margin_top = 13.0
+margin_right = 220.0
+margin_bottom = 27.0
+text = "Environment"
+
+[node name="OptionButton" type="OptionButton" parent="hud/HBoxContainer"]
+margin_left = 224.0
+margin_right = 292.0
+margin_bottom = 40.0
+text = "Spring"
+items = [ "Spring", null, false, 0, null, "Autumn", null, false, 1, null ]
+selected = 0
+
+[node name="VSeparator2" type="VSeparator" parent="hud/HBoxContainer"]
+visible = false
+margin_left = 296.0
+margin_right = 300.0
+margin_bottom = 40.0
+
+[node name="Label2" type="Label" parent="hud/HBoxContainer"]
+visible = false
+margin_left = 304.0
+margin_top = 13.0
+margin_right = 367.0
+margin_bottom = 27.0
+text = "Transition"
+
+[node name="SpinBox" type="SpinBox" parent="hud/HBoxContainer"]
+visible = false
+margin_left = 304.0
+margin_right = 378.0
+margin_bottom = 40.0
+min_value = 0.1
+max_value = 10.0
+step = 0.1
+value = 1.0
+suffix = "s"
+
 [node name="FileDialog" type="FileDialog" parent="hud"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-window_title = "Load color map"
+window_title = "Open a File"
 mode = 0
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-material_override = ExtResource( 3 )
+[node name="Tween" type="Tween" parent="."]
 [connection signal="toggled" from="hud/HBoxContainer/CheckBox" to="." method="_on_CheckBox_toggled"]
 [connection signal="pressed" from="hud/HBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="item_selected" from="hud/HBoxContainer/OptionButton" to="." method="_on_OptionButton_item_selected"]
 [connection signal="confirmed" from="hud/FileDialog" to="." method="_on_FileDialog_confirmed"]
 [connection signal="file_selected" from="hud/FileDialog" to="." method="_on_FileDialog_file_selected"]
 
