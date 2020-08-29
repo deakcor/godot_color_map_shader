@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/scene.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/main.gd" type="Script" id=2]
+[ext_resource path="res://assets/new_shadermaterial.tres" type="Material" id=3]
+[ext_resource path="res://assets/textures/color_map.png" type="Texture" id=5]
+
+[node name="main" type="Node"]
+script = ExtResource( 2 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 0, 1, 15 )
+
+[node name="scene" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.173648, 0, 0.984808, 0, 1, 0, -0.984808, 0, 0.173648, 0, 0, 0 )
+
+[node name="Leaf004" parent="scene/RootNode gltf orientation matrix/RootNode model correction matrix/Root" index="1"]
+transform = Transform( 0.354492, 0.934512, -0.0319797, -0.795123, 0.319262, 0.515608, 0.492052, -0.157352, 0.856227, 0.0950251, -1.1935, 2.62487 )
+
+[node name="Leaf003" parent="scene/RootNode gltf orientation matrix/RootNode model correction matrix/Root" index="2"]
+transform = Transform( 0.940662, -0.0876451, 0.327832, 0.12414, -0.81023, -0.572814, 0.315824, 0.579522, -0.751272, -1.43275, -2.76772, 0.693011 )
+
+[node name="Leaf001" parent="scene/RootNode gltf orientation matrix/RootNode model correction matrix/Root" index="3"]
+transform = Transform( 0.79024, -0.587142, 0.175457, 0.476572, 0.768832, 0.426353, -0.385226, -0.253303, 0.887377, 0.15299, -2.05335, 0.101384 )
+
+[node name="Leaf006" parent="scene/RootNode gltf orientation matrix/RootNode model correction matrix/Root" index="4"]
+transform = Transform( 0.998745, 0.000581474, -0.0500799, -0.00281661, 0.999002, -0.0445724, 0.050004, 0.0446575, 0.99775, -3.79318, 2.2602, 3.00735 )
+
+[node name="Leaf005" parent="scene/RootNode gltf orientation matrix/RootNode model correction matrix/Root" index="6"]
+transform = Transform( 0.967999, 0.0749374, -0.239503, -0.00735109, 0.962432, 0.271422, 0.250845, -0.260975, 0.932185, -3.42867, -1.33884, 3.31898 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.062024, 0.998075, 0, -0.998075, 0.062024, 0, 10.9288, 0 )
+
+[node name="hud" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="hud"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="CheckBox" type="CheckBox" parent="hud/HBoxContainer"]
+margin_right = 127.0
+margin_bottom = 40.0
+text = "Activate shader"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="hud/HBoxContainer"]
+margin_left = 131.0
+margin_right = 311.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 180, 0 )
+text = "Color map"
+icon = ExtResource( 5 )
+flat = true
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileDialog" type="FileDialog" parent="hud"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+window_title = "Load color map"
+mode = 0
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+material_override = ExtResource( 3 )
+[connection signal="toggled" from="hud/HBoxContainer/CheckBox" to="." method="_on_CheckBox_toggled"]
+[connection signal="pressed" from="hud/HBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="confirmed" from="hud/FileDialog" to="." method="_on_FileDialog_confirmed"]
+[connection signal="file_selected" from="hud/FileDialog" to="." method="_on_FileDialog_file_selected"]
+
+[editable path="scene"]
