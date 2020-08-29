@@ -86,10 +86,10 @@ text = "Environment"
 
 [node name="OptionButton" type="OptionButton" parent="hud/HBoxContainer"]
 margin_left = 224.0
-margin_right = 292.0
+margin_right = 300.0
 margin_bottom = 40.0
-text = "Spring"
-items = [ "Spring", null, false, 0, null, "Autumn", null, false, 1, null ]
+text = "Normal"
+items = [ "Normal", null, false, 0, null, "Autumn", null, false, 1, null, "Snow", null, false, 2, null, "Dark", null, false, 3, null ]
 selected = 0
 
 [node name="VSeparator2" type="VSeparator" parent="hud/HBoxContainer"]
@@ -116,6 +116,15 @@ max_value = 10.0
 step = 0.1
 value = 1.0
 suffix = "s"
+
+[node name="TextureRect" type="TextureRect" parent="hud/HBoxContainer"]
+visible = false
+margin_left = 296.0
+margin_right = 696.0
+margin_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource( 5 )
+stretch_mode = 1
 
 [node name="FileDialog" type="FileDialog" parent="hud"]
 anchor_right = 1.0
